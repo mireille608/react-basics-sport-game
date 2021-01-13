@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react-basics-sport-game</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js" ></script>
+    <!--React Dom-->
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" ></script>
+    <!--Babel-->
+    <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+     <script type='text/babel'>
+
+        class Team extends React.Component{
+            constructor(props){
+            super(props)
+
+            this.state = {
+                shots: 0,
+                score: 0
+            }
+            this.shotsound = new Audio('./audio/audio-basket.mp3')
+            this.scoresound = new Audio('./audio/ball-hit-score.wav')
+        } 
+
+           
+        shotHandler =()=>{
+            let score = this.state.score
+            this.shotsound.play()
+            
+            if(Math.random()>0.5){
+                score +=1
+
+                setTimeout(()=>{
+                this.scoresound.play()
+            },100)
+            }
+           // console.log('shoot!')
+           this.setState((state,props)=>({shots:state.shots +1,
+            score
+        }))
+        }
+             render(){
+                 let shotpercentageDiv
+
+                 if(this.state.shots){
+                 const shotpercentage = Math.round((this.state.score / this.state.shots)*100)
+                 shotpercentageDiv = (
+                    <div>
+                        <strong>shooting %:{shotpercentage}</strong>
+                        </div>
+                 )
+                 }
+                return(
+                    <div className="Team">
+                        Team
+                        <h2>{this.props.name}</h2>
+
+                        <h2>{this.props.tagLine}</h2>
+                <img src={this.props.img}/>
+            
+            <div>
+                <strong>shots:</strong> {this.state.shots}
+                <div>
+                    <strong>score:</strong> {this.state.score}
+                </div>
+                     </div>
+                     
+                        
+                    
+                        {shotpercentageDiv}
+
+                     <button onClick={this.shotHandler}>shoot!</button>
+                        </div>
+                            
+                )
+                    }               
+                }  
+                function Game (props) {
+                    return(
+                        <div className="Game">
+                            <h1>Welcome to {props.venue}</h1>
+                            <div className="stats" > 
+             <Team name="paris"
+               tagLine ='bleu'
+                 img="https://dicodusport.fr/blog/wp-content/uploads/2020/12/Euro-f%C3%A9minin-de-handball-2020-Victorieuse-de-la-Slov%C3%A9nie-la-France-file-au-tour-principal.png"/>
+        
+                 <div className="versus">
+                    <h1>vs</h1>
+                    </div>
+
+                 <Team name="cameroon"
+                tagLine='yellow'
+                img="https://www.fecahand.net/wp-content/uploads/2018/12/CAMEROUN-COTE-DIVOIRE-4-copie-e1544399695689.jpg"/>
+                
+                 </div>
+                            </div>
+                    )
+                }      
+    
+
+                      
+          function Handball(props){
+              const match = {
+                  name:'paris',
+        
+                   imgsrc ="https://dicodusport.fr/blog/wp-content/uploads/2020/12/Euro-f%C3%A9minin-de-handball-2020-Victorieuse-de-la-Slov%C3%A9nie-la-France-file-au-tour-principal.png"
+                     }
+                  
+                 const damier ={
+                     name:'cameroon',
+                     imgsrc:"https://www.fecahand.net/wp-content/uploads/2018/12/CAMEROUN-COTE-DIVOIRE-4-copie-e1544399695689.jpg"
+                 }
+
+
+        return(
+            <div className="Handball">
+                <Game venue ="Union 525 Gem"
+                homeTeam={cameroon}
+                visitingTeam={paris}
+                />
+                <Game venue ="sheridan arena"
+                homeTeam={cameroon}
+                visitingTeam={paris}
+                />
+                
+                  </div>
+                )   
+        
+            
+            }
+             
+          
+    
+    ReactDOM.render(
+        <Handball />,
+        document.getElementById('root')
+    )
+    
+</script>
+</body>
+</html>
