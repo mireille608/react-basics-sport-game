@@ -6,8 +6,10 @@
     <title>react-basics-sport-game</title>
     <link rel="stylesheet" href="style.css">
     
+
 </head>
 <body>
+
     <div id="root"></div>
 
     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js" ></script>
@@ -87,17 +89,21 @@
                         <div className="Game">
                             <h1>Welcome to {props.venue}</h1>
                             <div className="stats" > 
-             <Team name="paris"
-               tagLine ='bleu'
-                 img="https://dicodusport.fr/blog/wp-content/uploads/2020/12/Euro-f%C3%A9minin-de-handball-2020-Victorieuse-de-la-Slov%C3%A9nie-la-France-file-au-tour-principal.png"/>
+             <Team
+              name={props.visitingTeam.name}
+               
+                 img={props.visitingTeam.imgsrc}
+                 />
         
                  <div className="versus">
                     <h1>vs</h1>
                     </div>
 
-                 <Team name="cameroon"
-                tagLine='yellow'
-                img="https://www.fecahand.net/wp-content/uploads/2018/12/CAMEROUN-COTE-DIVOIRE-4-copie-e1544399695689.jpg"/>
+                 <Team
+                  name={props.homeTeam.name}
+                
+                img={props.homeTeam.imgsrc}
+                />
                 
                  </div>
                             </div>
@@ -107,27 +113,39 @@
 
                       
           function Handball(props){
-              const match = {
+        const match = {
                   name:'paris',
-        
-                   imgsrc ="https://dicodusport.fr/blog/wp-content/uploads/2020/12/Euro-f%C3%A9minin-de-handball-2020-Victorieuse-de-la-Slov%C3%A9nie-la-France-file-au-tour-principal.png"
+                    
+                   imgsrc :"https://dicodusport.fr/blog/wp-content/uploads/2020/12/Euro-f%C3%A9minin-de-handball-2020-Victorieuse-de-la-Slov%C3%A9nie-la-France-file-au-tour-principal.png"
                      }
                   
-                 const damier ={
+         const damier = {
                      name:'cameroon',
                      imgsrc:"https://www.fecahand.net/wp-content/uploads/2018/12/CAMEROUN-COTE-DIVOIRE-4-copie-e1544399695689.jpg"
+                 }
+                 const algerie ={
+                     name:'equipe algerie',
+                     imgsrc:"https://etudiant-algerien.com/wp-content/uploads/2018/01/handscolaire.jpg"
+                 }
+
+                 const marocaine= {
+                     name:'can marocaine',
+                     imgsrc:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJQQ-2cgm1s2CSPYWsDtt66PBU2o9R6aGFyw&usqp=CAU"
+
                  }
 
 
         return(
             <div className="Handball">
-                <Game venue ="Union 525 Gem"
-                homeTeam={cameroon}
-                visitingTeam={paris}
+                <Game
+                 venue ="Union 525 Gem"
+                homeTeam={match}
+                visitingTeam={damier}
                 />
-                <Game venue ="sheridan arena"
-                homeTeam={cameroon}
-                visitingTeam={paris}
+                <Game 
+                venue ="sheridan arena"
+                homeTeam={algerie}
+                visitingTeam={marocaine}
                 />
                 
                   </div>
